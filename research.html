@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Исследования — заявки и формы | Иван Тестов</title>
+<meta name="description" content="Страница исследований: оставьте заявку, закажите интервью или юзабилити-тест.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Исследования — Иван Тестов">
+<meta property="og:description" content="Заявка на исследование за минуту.">
+<meta property="og:image" content="assets/og-cover.svg">
+<meta name="theme-color" content="#050507">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="plasma"></canvas>
+<div class="grain"></div>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="index.html">ИТ · LAB</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="navlinks">
+      <a href="index.html">Главная</a>
+      <a href="research.html" class="active">Исследования</a>
+      <a href="test.html">Test</a>
+      <a href="admin.html">Админка</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section>
+    <div class="rv"><span class="eyebrow">Исследования</span>
+      <h1>Закажите <span class="grad">исследование</span></h1>
+      <p class="lead">Оставьте заявку — отвечу в течение дня. Вторая форма (глубокое интервью) управляется из админки и может скрываться.</p>
+    </div>
+
+    <form class="glass rv" data-lead="short" novalidate>
+      <span class="eyebrow">Форма 1 · Быстрая заявка</span>
+      <h2>Связаться</h2>
+      <div class="field"><label>Имя</label><input name="name" required placeholder="Как к вам обращаться"></div>
+      <div class="field"><label>Контакт (телефон, e-mail или мессенджер)</label><input name="contact" required placeholder="+7 ___ ___-__-__"></div>
+      <div class="field"><label>Что нужно?</label>
+        <select name="topic">
+          <option>UX-интервью</option><option>Юзабилити-тест</option><option>Аудит интерфейса</option><option>Другое</option>
+        </select>
+      </div>
+      <button class="btn btn-light" type="submit">Отправить заявку</button>
+      <div class="form-ok">Заявка ушла! Проверьте — скоро свяжусь.</div>
+    </form>
+
+    <div id="form2block">
+      <form class="glass rv" data-lead="deep" novalidate>
+        <span class="eyebrow">Форма 2 · Глубокое интервью</span>
+        <h2>Записаться на интервью</h2>
+        <p class="lead" style="margin-bottom:18px">40 минут разговора о вашем продукте. Этот блок можно скрыть из админ-панели.</p>
+        <div class="field"><label>Имя</label><input name="name" required placeholder="Ваше имя"></div>
+        <div class="field"><label>E-mail</label><input name="email" type="email" required placeholder="you@example.com"></div>
+        <div class="field"><label>О чём хотите поговорить?</label><textarea name="about" required placeholder="Пара слов о задаче..."></textarea></div>
+        <button class="btn btn-light blobbtn" type="submit">Записаться</button>
+        <div class="form-ok">Готово! Место почти ваше.</div>
+      </form>
+    </div>
+  </section>
+
+  <footer>© 2026 <span data-t1="name">Иван Тестов</span> · <a href="index.html">Главная</a></footer>
+</main>
+
+<div id="toast"></div>
+<script src="config.js"></script>
+<script src="plasma.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

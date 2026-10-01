@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Админка — управление блоками | Сайт t1</title>
+<meta name="description" content="Мини-панель: показ и скрытие блоков без вмешательства в код.">
+<meta name="theme-color" content="#050507">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="plasma"></canvas>
+<div class="grain"></div>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="index.html">ИТ · LAB</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="navlinks">
+      <a href="index.html">Главная</a>
+      <a href="research.html">Исследования</a>
+      <a href="test.html">Test</a>
+      <a href="admin.html" class="active">Админка</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section>
+    <div class="rv"><span class="eyebrow">Панель</span>
+      <h1>Управление <span class="grad">блоками</span></h1>
+      <p class="lead">Переключатели без кода. На WordPress это будут чекбоксы ACF / виджеты, здесь — та же логика на localStorage.</p>
+    </div>
+    <div class="glass rv" style="padding: clamp(22px,4vw,36px); margin-top: 24px;">
+      <div class="switch"><div>Форма «Глубокое интервью»<small>Страница «Исследования», второй блок. ТЗ: скрытие из админ-панели.</small></div>
+        <label class="tgl"><input type="checkbox" data-flag="showForm2"><i></i></label></div>
+      <div class="switch"><div>QR-блок на главной<small>Скрыть секцию с QR-кодом.</small></div>
+        <label class="tgl"><input type="checkbox" data-flag="showQr"><i></i></label></div>
+      <div class="switch"><div>Кнопки CV и контакта<small>Hero-блок главной страницы.</small></div>
+        <label class="tgl"><input type="checkbox" data-flag="showCta"><i></i></label></div>
+      <div class="btnrow" style="margin-top:18px">
+        <button class="btn btn-light" id="saveAdmin">Сохранить</button>
+        <button class="btn btn-ghost" id="resetAdmin">Сбросить</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass rv" style="padding: clamp(22px,4vw,36px);">
+      <span class="eyebrow">Заявки</span>
+      <h2>Что пришло с форм</h2>
+      <div class="leads" id="leads"><p>Пока пусто — отправьте тестовую заявку со страницы «Исследования».</p></div>
+      <div class="btnrow" style="margin-top:14px">
+        <button class="btn btn-ghost" id="clearLeads">Очистить заявки</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 · Мини-админка сайта-визитки</footer>
+</main>
+
+<div id="toast"></div>
+<script src="config.js"></script>
+<script src="plasma.js"></script>
+<script src="main.js"></script>
+<script>
+(function () {
+  function load() {
+    var o = {};
+    try { o = JSON.parse(localStorage.getItem("t1admin") || "{}"); } catch (e) {}
+    document.querySelectorAll("[data-flag]").forEach(function (box) {
+      var k = box.getAttribute("data-flag");
+      box.checked = (k in o) ? !!o[k] : !!(window.T1.admin[k]);
+    });
+  }
+  load();
+  document.getElementById("saveAdmin").addEventListener("click", function () {
+    var o = {};
+    document.querySelectorAll("[data-flag]").forEach(function (box) { o[box.getAttribute("data-flag")] = box.checked; });
+    localStorage.setItem("t1admin", JSON.stringify(o));
+    t1toast("Сохранено. Обновите другие страницы.");
+  });
+  document.getElementById("resetAdmin").addEventListener("click", function () {
+    localStorage.removeItem("t1admin"); load(); t1toast("Сброшено к значениям по умолчанию.");
+  });
+  function renderLeads() {
+    var box = document.getElementById("leads");
+    var arr = [];
+    try { arr = JSON.parse(localStorage.getItem("t1leads") || "[]"); } catch (e) {}
+    if (!arr.length) { box.innerHTML = "<p>Пока пусто — отправьте тестовую заявку со страницы «Исследования».</p>"; return; }
+    box.innerHTML = arr.slice().reverse().map(function (l) {
+      var rows = Object.keys(l).filter(function (k) { return k !== "form" && k !== "at"; })
+        .map(function (k) { return "<b>" + k + ":</b> " + String(l[k]).slice(0, 140); }).join("<br>");
+      return "<p style='margin-bottom:12px'>[" + (l.form || "?") + "] " + (l.at || "").slice(0, 16).replace("T", " ") + "<br>" + rows + "</p>";
+    }).join("");
+  }
+  renderLeads();
+  document.getElementById("clearLeads").addEventListener("click", function () {
+    localStorage.removeItem("t1leads"); renderLeads(); t1toast("Заявки очищены.");
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Иван Тестов — сайт-визитка | Исследования и дизайн</title>
+<meta name="description" content="Сайт-визитка: исследования, прототипы, аналитика. Скачать CV, сохранить контакт, оставить заявку.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Иван Тестов — сайт-визитка">
+<meta property="og:description" content="Исследования, прототипы, аналитика. Свяжитесь в один клик.">
+<meta property="og:image" content="assets/og-cover.svg">
+<meta name="theme-color" content="#050507">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="plasma"></canvas>
+<div class="grain"></div>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="index.html">ИТ · LAB</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="navlinks">
+      <a href="index.html" class="active">Главная</a>
+      <a href="research.html">Исследования</a>
+      <a href="test.html">Test</a>
+      <a href="admin.html">Админка</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="glass hero-card rv">
+      <span class="eyebrow" data-t1="heroTag">Сайт-визитка</span>
+      <h1><span data-t1="name">Иван Тестов</span></h1>
+      <p class="subtitle" data-t1="role">Исследователь · Дизайнер</p>
+      <p data-t1="heroText">Проектирую интерфейсы и провожу исследования.</p>
+      <div class="btnrow" data-cta>
+        <a class="btn btn-light" href="cv.pdf" download>Скачать CV</a>
+        <button class="btn btn-ghost" data-vcard>Сохранить контакт</button>
+      </div>
+    </div>
+    <div class="rv">
+      <div class="avatar-blob">ИТ</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rv"><span class="eyebrow">Направления</span><h2>Чем занимаюсь</h2></div>
+    <div class="grid3">
+      <div class="glass card tilt rv"><span class="num">01</span><h3>UX-исследования</h3><p>Интервью, CJM, JTBD, проверка гипотез цифрами.</p></div>
+      <div class="glass card tilt rv"><span class="num">02</span><h3>Прототипы</h3><p>Быстрые интерактивные макеты и дизайн-системы.</p></div>
+      <div class="glass card tilt rv"><span class="num">03</span><h3>Аналитика</h3><p>Метрики, воронки, A/B-тесты и отчёты.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass rv" style="padding: clamp(26px,4vw,44px);">
+      <span class="eyebrow">Обо мне</span>
+      <h2 data-t1="aboutTitle">Обо мне</h2>
+      <p class="lead">Занимаюсь продуктовыми исследованиями и дизайном: интервью, опросы, юзабилити-тесты, аналитика.</p>
+      <p class="lead" style="margin-top:12px">Строгая методология, подача в стиле iOS — чисто, воздушно, с жидким стеклом.</p>
+    </div>
+  </section>
+
+  <section id="qrblock">
+    <div class="glass qr-flex rv">
+      <img id="qrimg" src="assets/qr.png" alt="QR-код">
+      <div>
+        <span class="eyebrow">QR-код</span>
+        <h2>Наведите камеру</h2>
+        <p>Код ведёт на главную страницу. Файл кода — <b>assets/qr.png</b>: замените его своим, блок и ссылка подхватятся сами.</p>
+        <div class="btnrow" style="margin-top:16px">
+          <a class="btn btn-ghost" data-t1-href="qrUrl" href="https://example.com">Открыть ссылку</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee rv"><div><span>Исследования · Прототипы · Аналитика · Дизайн-системы · </span><span>Исследования · Прототипы · Аналитика · Дизайн-системы · </span></div></div>
+
+  <footer>
+    © 2026 <span data-t1="name">Иван Тестов</span> · <a href="research.html">Исследования</a> · <a href="test.html">Test</a>
+  </footer>
+</main>
+
+<div id="toast"></div>
+<script src="config.js"></script>
+<script src="plasma.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
